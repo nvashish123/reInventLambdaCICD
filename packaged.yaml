@@ -12,7 +12,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://vashi-lambda-code/4c6f6c6a7eda33167f09e6a5e7766c53
+      CodeUri: s3://vashi-lambda-code/9ce6f3da1a86b821c1d816cd754d3174
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Events:
