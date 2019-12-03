@@ -26,9 +26,9 @@ Inside your cloud9 workspace, do the following -
 git clone https://github.com/nvashish123/reInventLambdaCICD.git
 cd reInventLambdaCICD
 git remote rm origin
-git remote add origin <codecommit-endpoint.git>
+git remote add origin <codecommit-originendpoint.git>
 
-hint : it should look like - https://git-codecommit.us-east-1.amazonaws.com/v1/repos/reInventCICD.git
+hint : codecommit-originendpoint.git should look like - https://git-codecommit.us-east-1.amazonaws.com/v1/repos/reInventCICD.git
 
 now you should have a codecommit repo with the base code checked into it.
 ```
@@ -36,15 +36,15 @@ now you should have a codecommit repo with the base code checked into it.
 In order to build and deploy this serverless application, run the following commands - 
 
 ```bash
-sam package  --output-template-file packaged.yaml  --s3-bucket vashi-lambda-code
+sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name>
 ```
 
 
 ```bash
-sam deploy --template-file packaged.yaml --stack-name LambdaCICD --capabilities CAPABILITY_IAM
+sam deploy --template-file packaged.yaml --stack-name <stack-name-here> --capabilities CAPABILITY_IAM
 ```
 
-Create CodeBuild and code pipeline from console.
+Create CodeBuild and CodePipeline from console.
 
 create a IAM role for CloudFormation - follow instructions here - https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role 
 
