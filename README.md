@@ -1,7 +1,7 @@
 # Lambda CICD 
 
 
-1. Prerequisites for the builders session hands on :
+**** Prerequisites for the builders session hands on ****
 
 ```bash
 
@@ -11,17 +11,18 @@ b. Basic familiarity with git commands
 
 ```
 
+ - Instructions for the hands-on session:
 
-2. Create a new bucket to be used with sam package command to upload your lambda deployment package
+1. Create a new bucket to be used with sam package command to upload your lambda deployment package
 or, If you have an existing S3 bucket which you can use for this purpose in your account, that's fine too.
 Also, Cloud9 is the IDE of choice for this session to avoid time installing cli tools. Create a new workspace in Cloud9
 
 
 
-3. Create a new CodeCommit repo from the AWS console, note down its endpoint.
+2. Create a new CodeCommit repo from the AWS console, note down its endpoint.
 
 
-4. Perform the following steps to replicate the github repo into a CodeCommit repo -
+3. Perform the following steps to replicate the github repo into a CodeCommit repo -
 
 Inside your cloud9 workspace, do the following - 
 
@@ -48,7 +49,7 @@ git push origin master
 now you should have a codecommit repo with the base code checked into it.
 
 
-5. In order to build and deploy this serverless application, run the following commands - 
+4. In order to build and deploy this serverless application, run the following commands - 
 
 ```bash
 sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name>
@@ -61,9 +62,9 @@ sam deploy --template-file packaged.yaml --stack-name <stack-name-here> --capabi
 
 Verify that the new serverless application has been created in your AWS console.
 
-6. Open the buildspec.yml file from the root of this project and update the S3 bucket name to your S3 bucket name in EXPORT statement
+5. Open the buildspec.yml file from the root of this project and update the S3 bucket name to your S3 bucket name in EXPORT statement
 
-7. Checkin the buildspec.yml to the repo
+6. Checkin the buildspec.yml to the repo
 
 ```bash
 
@@ -75,9 +76,9 @@ git push origin master
 
 
 
-8. Create CodeBuild project from the AWS console using your CodeCommit repo as the source.
+7. Create CodeBuild project from the AWS console using your CodeCommit repo as the source.
 
-9. Update the IAM role for this CodeBuild project to add S3FullAccess policy.
+8. Update the IAM role for this CodeBuild project to add S3FullAccess policy.
 
 9. Test the CodeBuild build
 
@@ -90,10 +91,10 @@ This role will be used in next step when we will create a CodePipeline
 
 ```bash
     
-    Use CodeCommit repo as source
-    Use the Codebuild project we created above on the Build stage
-    Use Cloudformation for the deployment stage
-    Review and create the Pipeline
+    a. Use CodeCommit repo as source
+    b. Use the Codebuild project we created above on the Build stage
+    c. Use Cloudformation for the deployment stage
+    d. Review and create the Pipeline
     
 ```
 The pipeline should kick off automatically. Let it finish, but you would notice that it has not deployed the Lambda function just yet.
