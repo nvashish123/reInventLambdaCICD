@@ -18,6 +18,9 @@ or, If you have an existing S3 bucket which you can use for this purpose in your
 Also, Cloud9 is the IDE of choice for this session to avoid time installing cli tools. Create a new workspace in Cloud9
 
 
+```bash
+aws s3api create-bucket --bucket <your_bucket_name>
+```
 
 2. Create a new CodeCommit repo from the AWS console, note down its endpoint.
 
