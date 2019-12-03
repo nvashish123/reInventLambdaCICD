@@ -12,8 +12,6 @@ b. Basic familiarity with git commands
 ```
 
 
-
-
 2. Create a new bucket to be used with sam package command to upload your lambda deployment package
 or, If you have an existing S3 bucket which you can use for this purpose in your account, that's fine too.
 Also, Cloud9 is the IDE of choice for this session to avoid time installing cli tools. Create a new workspace in Cloud9
@@ -32,9 +30,20 @@ git clone https://github.com/nvashish123/reInventLambdaCICD.git
 cd reInventLambdaCICD
 git remote rm origin
 git remote add origin <codecommit-originendpoint.git>
-```
 
 hint : codecommit-originendpoint.git should look like - https://git-codecommit.us-east-1.amazonaws.com/v1/repos/reInventCICD.git
+
+make a change in the README file, like an extra space or something ( sometimes git does not recognize that the origin has changed unless a code change is forced)
+
+then, checkin everything to the new CodeCommit repo :
+    
+git add *
+git commit -m "initial commit"
+git push origin master
+
+```
+
+
 
 now you should have a codecommit repo with the base code checked into it.
 
