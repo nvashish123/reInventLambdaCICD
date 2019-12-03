@@ -5,7 +5,7 @@ phases:
       nodejs: 10
   build:
     commands:
-      - export BUCKET=vashi-lambda-code
+      - export BUCKET=<your_bucket_name>
       - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
 artifacts:
   type: zip
