@@ -63,10 +63,11 @@ Test the CodeBuild build
 
 ```
 
+create a IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
 ```bash
 
-create a IAM role for CloudFormation - [follow instructions here] (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
+
 Create CodePipeline from console using the following details :
     
     Use CodeCommit repo as source
