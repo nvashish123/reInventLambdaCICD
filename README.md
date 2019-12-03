@@ -44,10 +44,85 @@ sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name
 sam deploy --template-file packaged.yaml --stack-name <stack-name-here> --capabilities CAPABILITY_IAM
 ```
 
-Create CodeBuild and CodePipeline from console.
+```bash
 
-create a IAM role for CloudFormation - follow instructions here - https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role 
+open the buildspec.yml file from the root of this project and update the S3 bucket name to your S3 bucket name in EXPORT statement
 
-Start doing controlled deployments by adding the Lambda alias and preTrafficHook
+check in the buildspec.yml to the repo
+
+git add buildspec.yml
+git commit -m "updated buildspec.yml"
+git push origin master
+
+```
+
+```bash
+
+Create CodeBuild project from the AWS console using your CodeCommit repo as the source
+Test the CodeBuild build
+
+```
+
+
+```bash
+
+create a IAM role for CloudFormation - follow instructions here - https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role
+Create CodePipeline from console using the following details :
+    
+    Use CodeCommit repo as source
+    Use the Codebuild project we created above on the Build stage
+    Use Cloudformation for the deployment stage
+    Review and create the Pipeline
+    
+The pipeline should kick off automatically. Let it finish, but you would notice that it has not deployed the Lambda function just yet.
+that is because, we have only created a changeset, but not executed it yet.
+So, edit the Pipeline to add another action to execute the chageset.
+Make a code change in Lambda, check in the code to CodeCommit, and watch the Pipeline getting kicked off automatically
+Test your Lambda function to ensure the new code is deployed. 
+
+You have successfully created a CI/CD pipeline for your serverless function.
+
+```
+
+Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
+
+```bash
+
+Go to the template.yml file, uncomment line 20 - AutoPublishAlias: prod
+Update the Lambda function code in app.js to make the changes visible.
+Save and check in the changes
+Pipeline should kick off automatically and now your Lambda function should have an Alias created with the name 'prod'
+
+
+Now, uncomment next 4 lines, from line 21-25 :
+    
+    # DeploymentPreference:
+      #   Type: Canary10Percent5Minutes
+      #   Hooks:
+      #     PreTraffic: !Ref CICDPreHookFunction
+      
+Also, uncomment the CICDPreHookFunction PreTraffic Hook Lambda function starting at line 33      
+
+Update the Lambda function code in app.js to make the changes visible.
+
+Save and check in the changes
+Pipeline should kick off automatically and now your Lambda function should have a controlled deployment with Canary10Percent5Minutes
+So, the new Lambda version will be called for the 10% of the traccif, for the 5 minutes. After 5 minutes, all the traffic will go to the new lambda version code
+
+
+```
+
+Simulate a test-case failure and automatic rollback scenrio :
+
+```bash
+
+update the source code of the preTrafficHook.js lambda function to return the status as 'Failed' on line 25
+Update the Lambda function code in app.js to make the changes visible.
+Save and check in the changes
+The Pipeline should fail at the deploy stage and the new code should not be deployed.
+This is intentional as our Lambda pretrafficHook returned a test failure and the deployment was rolled back.
+
+```
+
 
 
