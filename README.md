@@ -11,19 +11,18 @@ b. Basic familiarity with git commands
 ```
 
 
-```bash
 
-Create a new bucket to be used with sam package command to upload your lambda deployment package
-or,
-If you have an existing S3 bucket which you can use for this purpose, in your account, that's fine too
 
-```
+2. Create a new bucket to be used with sam package command to upload your lambda deployment package
+or, If you have an existing S3 bucket which you can use for this purpose, in your account, that's fine too
+
+
 
 ```bash
 Create a new Codecommit repo from the AWS console, note down its endpoint
 ```
 
-2. Perform the following steps to replicate the github repo into a CodeCommit repo -
+3. Perform the following steps to replicate the github repo into a CodeCommit repo -
 
 Inside your cloud9 workspace, do the following - 
 
@@ -38,7 +37,7 @@ hint : codecommit-originendpoint.git should look like - https://git-codecommit.u
 now you should have a codecommit repo with the base code checked into it.
 ```
 
-3. In order to build and deploy this serverless application, run the following commands - 
+4. In order to build and deploy this serverless application, run the following commands - 
 
 ```bash
 sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name>
@@ -68,7 +67,7 @@ Test the CodeBuild build
 
 ```
 
-4. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
+5. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
 This role will be used in next step when we will create a CodePipeline
 
@@ -93,7 +92,7 @@ You have successfully created a CI/CD pipeline for your serverless function.
 
 ```
 
-5. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
+6. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
 
 ```bash
 
@@ -121,7 +120,7 @@ So, the new Lambda version will be called for the 10% of the traccif, for the 5 
 
 ```
 
-6. Simulate a test-case failure and automatic rollback scenrio :
+7. Simulate a test-case failure and automatic rollback scenrio :
 
 ```bash
 
