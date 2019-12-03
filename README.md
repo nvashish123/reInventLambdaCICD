@@ -3,8 +3,13 @@
 
 1. Prerequisites for the builders session hands on :
 
+```bash
+
 a. You should be able to use an AWS account and log into it with admin role.
 b. Basic familiarity with git commands
+
+```
+
 
 ```bash
 
