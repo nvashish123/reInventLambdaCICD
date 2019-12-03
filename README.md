@@ -92,14 +92,14 @@ This role will be used in next step when we will create a CodePipeline
 ```bash
     
     a. Use CodeCommit repo as source
-    b. Use the Codebuild project we created above on the Build stage
-    c. Use Cloudformation for the deployment stage
+    b. Use the Codebuild project we created above for the Build stage
+    c. Use Cloudformation for the deployment stage - choose 'create or update a changeset' as action
     d. Review and create the Pipeline
     
 ```
 The pipeline should kick off automatically. Let it finish, but you would notice that it has not deployed the Lambda function just yet.
 that is because, we have only created a Cloudformation changeset, but not executed it yet.
-So, edit the Pipeline to add another action to execute the chageset.
+So, edit the Pipeline to add another Cloudformation action as 'execute changeset' in order to execute the chageset.
 Make a code change in Lambda, check in the code to CodeCommit, and watch the Pipeline getting kicked off automatically.
 Test your Lambda function to ensure the new code is deployed. 
 
