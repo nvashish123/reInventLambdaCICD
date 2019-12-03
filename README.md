@@ -1,10 +1,10 @@
 # Lambda CICD 
 
 
-Prerequisites for the builders session hands on :
+1. Prerequisites for the builders session hands on :
 
-1. You should be able to use an AWS account and log into it with admin role.
-2. Basic familiarity with git commands
+a. You should be able to use an AWS account and log into it with admin role.
+b. Basic familiarity with git commands
 
 ```bash
 
@@ -18,7 +18,7 @@ If you have an existing S3 bucket which you can use for this purpose, in your ac
 Create a new Codecommit repo from the AWS console, note down its endpoint
 ```
 
-Perform the following steps to replicate the github repo into a CodeCommit repo -
+2. Perform the following steps to replicate the github repo into a CodeCommit repo -
 
 Inside your cloud9 workspace, do the following - 
 
@@ -33,7 +33,7 @@ hint : codecommit-originendpoint.git should look like - https://git-codecommit.u
 now you should have a codecommit repo with the base code checked into it.
 ```
 
-In order to build and deploy this serverless application, run the following commands - 
+3. In order to build and deploy this serverless application, run the following commands - 
 
 ```bash
 sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name>
@@ -63,7 +63,7 @@ Test the CodeBuild build
 
 ```
 
-Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
+4. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
 This role will be used in next step when we will create a CodePipeline
 
@@ -88,7 +88,7 @@ You have successfully created a CI/CD pipeline for your serverless function.
 
 ```
 
-Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
+5. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
 
 ```bash
 
@@ -116,7 +116,7 @@ So, the new Lambda version will be called for the 10% of the traccif, for the 5 
 
 ```
 
-Simulate a test-case failure and automatic rollback scenrio :
+6. Simulate a test-case failure and automatic rollback scenrio :
 
 ```bash
 
