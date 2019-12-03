@@ -18,11 +18,10 @@ or, If you have an existing S3 bucket which you can use for this purpose, in you
 
 
 
-```bash
-Create a new Codecommit repo from the AWS console, note down its endpoint
-```
+3. Create a new Codecommit repo from the AWS console, note down its endpoint
 
-3. Perform the following steps to replicate the github repo into a CodeCommit repo -
+
+4. Perform the following steps to replicate the github repo into a CodeCommit repo -
 
 Inside your cloud9 workspace, do the following - 
 
@@ -31,13 +30,14 @@ git clone https://github.com/nvashish123/reInventLambdaCICD.git
 cd reInventLambdaCICD
 git remote rm origin
 git remote add origin <codecommit-originendpoint.git>
+```
 
 hint : codecommit-originendpoint.git should look like - https://git-codecommit.us-east-1.amazonaws.com/v1/repos/reInventCICD.git
 
 now you should have a codecommit repo with the base code checked into it.
-```
 
-4. In order to build and deploy this serverless application, run the following commands - 
+
+5. In order to build and deploy this serverless application, run the following commands - 
 
 ```bash
 sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name>
@@ -48,11 +48,12 @@ sam package  --output-template-file packaged.yaml  --s3-bucket <your-bucket-name
 sam deploy --template-file packaged.yaml --stack-name <stack-name-here> --capabilities CAPABILITY_IAM
 ```
 
+
+6. Open the buildspec.yml file from the root of this project and update the S3 bucket name to your S3 bucket name in EXPORT statement
+
+7. Checkin the buildspec.yml to the repo
+
 ```bash
-
-open the buildspec.yml file from the root of this project and update the S3 bucket name to your S3 bucket name in EXPORT statement
-
-check in the buildspec.yml to the repo
 
 git add buildspec.yml
 git commit -m "updated buildspec.yml"
@@ -60,28 +61,27 @@ git push origin master
 
 ```
 
-```bash
 
-Create CodeBuild project from the AWS console using your CodeCommit repo as the source
-Test the CodeBuild build
 
-```
+8. Create CodeBuild project from the AWS console using your CodeCommit repo as the source
 
-5. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
+9. Test the CodeBuild build
+
+10. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
 This role will be used in next step when we will create a CodePipeline
 
 
+11. Create CodePipeline from console using the following details :
+
 ```bash
-
-
-Create CodePipeline from console using the following details :
     
     Use CodeCommit repo as source
     Use the Codebuild project we created above on the Build stage
     Use Cloudformation for the deployment stage
     Review and create the Pipeline
     
+```
 The pipeline should kick off automatically. Let it finish, but you would notice that it has not deployed the Lambda function just yet.
 that is because, we have only created a changeset, but not executed it yet.
 So, edit the Pipeline to add another action to execute the chageset.
@@ -90,9 +90,8 @@ Test your Lambda function to ensure the new code is deployed.
 
 You have successfully created a CI/CD pipeline for your serverless function.
 
-```
 
-6. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
+12. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
 
 ```bash
 
@@ -120,7 +119,7 @@ So, the new Lambda version will be called for the 10% of the traccif, for the 5 
 
 ```
 
-7. Simulate a test-case failure and automatic rollback scenrio :
+13. Simulate a test-case failure and automatic rollback scenrio :
 
 ```bash
 
