@@ -83,7 +83,7 @@ git push origin master
 
 8. Update the IAM role for this CodeBuild project to add S3FullAccess policy.
 
-9. Test the CodeBuild build
+9. At this stage, we have created a CodeBuild project, and we will use it in the Codepipeline in next steps.
 
 10. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
