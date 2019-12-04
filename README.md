@@ -83,7 +83,7 @@ git push origin master
 
 8. Update the IAM role for this CodeBuild project to add S3FullAccess policy.
 
-9. At this stage, we have created a CodeBuild project, and we will use it in the Codepipeline in next steps.
+9. At this stage, you have created a CodeBuild project, and we will use it in the Codepipeline in next steps.
 
 10. Create a new IAM role for CloudFormation - [follow instructions here] - (https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html#with-pipeline-create-cfn-role)
 
@@ -106,7 +106,7 @@ So, edit the Pipeline to add another Cloudformation action as 'execute changeset
 Make a code change in Lambda, check in the code to CodeCommit, and watch the Pipeline getting kicked off automatically.
 Test your Lambda function to ensure the new code is deployed. 
 
-At this point, you have successfully created a CI/CD pipeline for your serverless function.
+At this point, you have successfully created a CI/CD pipeline for your serverless application.
 
 
 12. Start doing controlled deployments by adding the Lambda alias and preTrafficHook - 
@@ -114,9 +114,9 @@ At this point, you have successfully created a CI/CD pipeline for your serverles
 ```bash
 
 Go to the template.yml file, uncomment line 20 - AutoPublishAlias: prod
-Update the Lambda function code in app.js to make the changes visible.
-Save and check in the changes
-Pipeline should kick off automatically and now your Lambda function should have an Alias created with the name 'prod'
+Update the Lambda function code in app.js to make the changes visible for the testing purpose.
+Save and check-in the changes
+CodePipeline should kick off automatically and now your Lambda function should have an Alias created with the name 'prod'
 
 
 Now, uncomment next 4 lines, from line 21-25 :
@@ -131,7 +131,7 @@ Also, uncomment the CICDPreHookFunction PreTraffic Hook Lambda function starting
 Update the Lambda function code in app.js to make the changes visible for testing purpose.
 
 Save and check in the changes
-Pipeline should kick off automatically and now your Lambda function should have a controlled deployment with Canary10Percent5Minutes deployment setting.
+CodePipeline should kick off automatically and now your Lambda function should have a controlled deployment with Canary10Percent5Minutes deployment setting.
 So, the new Lambda version will be called for the 10% of the traffic, for the first 5 minutes. After 5 minutes, all the traffic will go to the new lambda version code.
 
 
@@ -144,7 +144,7 @@ So, the new Lambda version will be called for the 10% of the traffic, for the fi
 update the source code of the preTrafficHook.js lambda function to return the status as 'Failed' on line 25
 Update the Lambda function code in app.js to make the changes visible for testing purpose.
 Save and check in the changes
-The Pipeline should fail at the deploy stage and the new code should not be deployed.
+The CodePipeline should fail at the deploy stage and the new code should not be deployed.
 This is intentional as our Lambda pretrafficHook returned a test failure and the deployment was rolled back.
 
 ```
