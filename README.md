@@ -22,7 +22,7 @@ Also, Cloud9 is the IDE of choice for this session to avoid time installing cli 
 aws s3api create-bucket --bucket <your_bucket_name>
 ```
 
-2. Create a new CodeCommit repo from the AWS console, note down its endpoint.
+2. Create a new CodeCommit repo from the AWS console, note down its endpoint. Also, if you do not already have it, create git credentials from the IAM console for the logged in IAM user. Once created, download the csv file with credentials on your local machine.
 
 
 3. Perform the following steps to replicate the github repo into a CodeCommit repo -
